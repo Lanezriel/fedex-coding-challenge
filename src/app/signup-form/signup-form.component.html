@@ -1,0 +1,78 @@
+<div class="rounded-container">
+  <span class="container-title">Sign up</span>
+
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmitForm()" *ngIf="signupForm">
+    <mat-form-field class="form-field">
+      <mat-label>First Name</mat-label>
+      <input type="text" matInput id="firstName"
+        formControlName="firstName" required
+      />
+      <mat-error *ngIf="signupForm.controls.firstName.hasError('required')">
+        This field is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label>Last Name</mat-label>
+      <input type="text" matInput id="lastName"
+        formControlName="lastName" required
+      />
+      <mat-error *ngIf="signupForm.controls.lastName.hasError('required')">
+        This field is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label for="email">Email address</mat-label>
+      <input type="text" matInput id="email"
+        formControlName="email" required
+      />
+      <mat-error *ngIf="signupForm.controls.email.hasError('required')">
+        This field is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="signupForm.controls.email.hasError('pattern')">
+        This field must match <strong>email pattern</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label for="password">Password</mat-label>
+      <input type="password" matInput id="password"
+        formControlName="password" required
+      />
+      <mat-error *ngIf="signupForm.controls.password.hasError('required')">
+        This field is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="signupForm.controls.password.hasError('length')">
+        This field must have minimum <strong>8 characters</strong>
+      </mat-error>
+      <mat-error *ngIf="signupForm.controls.password.hasError('patternError')">
+        This field must contain at least 1 UpperCase letter <strong>and</strong> 1 LowerCase letter
+      </mat-error>
+      <mat-error *ngIf="signupForm.controls.password.hasError('nameError')">
+        This field <strong>must not contain</strong> user's first or last name
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="form-field">
+      <mat-label for="passwordConfirmed">Password confirmation</mat-label>
+      <input type="password" matInput id="passwordConfirmed"
+        formControlName="passwordConfirmed" required
+      />
+      <mat-error *ngIf="signupForm.controls.passwordConfirmed.hasError('required')">
+        This field is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="signupForm.controls.passwordConfirmed.hasError('notSame')">
+        The passwords <strong>don't match</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <button type="submit" class="submit-button"
+      [class.submit-button-valid]="signupForm.valid && !pending"
+      [disabled]="!signupForm.valid || pending"
+    >
+      <div>Sign up</div>
+      <mat-spinner diameter="20" *ngIf="pending" class="button-spinner"></mat-spinner>
+    </button>
+  </form>
+</div>
